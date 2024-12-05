@@ -18,6 +18,24 @@ def evaluate_board(board):
             else:
                 material -= get_piece_value(piece)
 
+            # Add value based on occupying center
+            if piece.color == chess.WHITE:
+                if piece.piece_type == chess.PAWN:
+                    if chess.square_name(square) in ["c4", "d4", "e4", "f4"]:
+                        material += 0.2
+            else:
+                if piece.piece_type == chess.PAWN:
+                    if chess.square_name(square) in ["c5", "d5", "e5", "f5"]:
+                        material -= 0.2
+
+            # Add value for checkmate
+            if piece.color == chess.WHITE:
+                if board.check_for_checkmate():
+                    material += 1000
+            else:
+                if board.check_for_checkmate():
+                    material -= 1000
+
     return material
 
 
