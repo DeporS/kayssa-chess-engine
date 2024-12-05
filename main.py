@@ -1,30 +1,25 @@
-from kayssa import Board, evaluate_board
+from kayssa import Board, evaluate_board, Engine
 import chess
 
 
 def main():
-    # Tworzymy instancję szachownicy
+    # Initiate board
     board = Board()
 
-    # Zaczynamy grę, np. wykonujemy ruchy
-    print("Początkowa pozycja na szachownicy:")
+    # Set FEN position
+    fen = "r1bqk1r1/1ppp1Npp/2n2n2/p1b1p3/2B1P3/3P4/PPP2PPP/RNBQ1RK1 w q - 1 8"
+    board.set_fen(fen)
+    print(f"Legal moves: {list(board.board.legal_moves)}")
+
+    # Starting position
     print(board.display())
 
-    # Oceniamy pozycję szachownicy
-    evaluation = evaluate_board(board)
-    print(f"Wartość oceny pozycji: {evaluation}")
+    # Initiate engine
+    engine = Engine(board)
 
-    # Przykład wykonania ruchu
-    move = board.board.push_san("e2e4")  # Ruch białych: pionek z e2 na e4
-    print(f"Po wykonaniu ruchu {move}:")
-    print(board.display())
-    move = board.board.push_san("d7d5")  # Ruch białych: pionek z e2 na e4
-    print(f"Po wykonaniu ruchu {move}:")
-    print(board.display())
-
-    # Ponownie oceniamy pozycję
-    evaluation = evaluate_board(board)
-    print(f"Wartość oceny pozycji po ruchu: {evaluation}")
+    # Get best move
+    best_move = engine.get_best_move()
+    print(f"Best move: {best_move}")
 
 
 if __name__ == "__main__":

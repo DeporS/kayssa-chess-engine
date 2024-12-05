@@ -44,6 +44,6 @@ class Board:
         # return fen of position
         return self.board.fen()
 
-    def set_fet(self, fen):
+    def set_fen(self, fen):
         # sets board with given fen
         self.board.set_fen(fen)
