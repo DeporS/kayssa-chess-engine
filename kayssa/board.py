@@ -10,15 +10,19 @@ class Board:
         # print board state
         print(self.board)
 
-    def is_checkmate(self):
+    def get_turn(self):
+        # White - True, Black - False
+        return self.board.turn
+
+    def check_for_checkmate(self):
         # check if checkmate
         return self.board.is_checkmate()
 
-    def is_stalemate(self):
+    def check_for_stalemate(self):
         # check if stalemate
         return self.board.is_stalemate()
 
-    def is_check(self):
+    def check_for_check(self):
         # check if check
         return self.board.is_check()
 
@@ -40,10 +44,10 @@ class Board:
         except ValueError:
             print("No moves made yet")
 
-    def get_fen(self):
+    def get_fen_position(self):
         # return fen of position
         return self.board.fen()
 
-    def set_fen(self, fen):
+    def set_fen_position(self, fen):
         # sets board with given fen
         self.board.set_fen(fen)
