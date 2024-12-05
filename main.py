@@ -1,18 +1,31 @@
-from kayssa import Board
+from kayssa import Board, evaluate_board
 import chess
 
-board = Board()
 
-print("Starting the game")
-board.display()
+def main():
+    # Tworzymy instancję szachownicy
+    board = Board()
 
-# Sprawdzamy legalne ruchy
-legal_moves = board.legal_moves()
-print("Legal moves:", legal_moves)
+    # Zaczynamy grę, np. wykonujemy ruchy
+    print("Początkowa pozycja na szachownicy:")
+    print(board.display())
 
-move = chess.Move.from_uci("e2e4")
-print(f"Move {move} is being made")
-board.make_move(move)
+    # Oceniamy pozycję szachownicy
+    evaluation = evaluate_board(board)
+    print(f"Wartość oceny pozycji: {evaluation}")
 
-# Wykonujemy ruch i wyświetlamy planszę
-board.display()
+    # Przykład wykonania ruchu
+    move = board.board.push_san("e2e4")  # Ruch białych: pionek z e2 na e4
+    print(f"Po wykonaniu ruchu {move}:")
+    print(board.display())
+    move = board.board.push_san("d7d5")  # Ruch białych: pionek z e2 na e4
+    print(f"Po wykonaniu ruchu {move}:")
+    print(board.display())
+
+    # Ponownie oceniamy pozycję
+    evaluation = evaluate_board(board)
+    print(f"Wartość oceny pozycji po ruchu: {evaluation}")
+
+
+if __name__ == "__main__":
+    main()
