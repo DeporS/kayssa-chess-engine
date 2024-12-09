@@ -7,7 +7,7 @@ def main():
     board = Board()
 
     # Set FEN position
-    fen = "k1K5/P7/pP1b4/8/3B4/8/8/8 w - - 0 1"
+    fen = "rnbqkbnr/pppp1ppp/8/4p2Q/4P3/8/PPPP1PPP/RNB1KBNR b KQkq - 1 2"
     board.set_fen_position(fen)
 
     # print(f"Legal moves: {list(board.board.legal_moves)}")
@@ -23,10 +23,18 @@ def main():
     for i in range(5):
         print(f"{'White' if board.get_turn() else 'Black'} moves")
         best_move = engine.get_best_move()
-        print(f"Best move: {best_move}")
-        board.make_move(best_move)
-        print(board.display())
-        print(f"Evaluation: {evaluate_board(board)}")
+        if best_move == None:
+            if board.check_for_checkmate():
+                print(f"\nCheckmate! {'White' if board.get_turn() else 'Black'} won!")
+                break
+            else:
+                print("\nStalemate!\n")
+                break
+        else:
+            print(f"Best move: {best_move}")
+            board.make_move(best_move)
+            print(board.display())
+            print(f"Evaluation: {evaluate_board(board)}")
 
 
 if __name__ == "__main__":
