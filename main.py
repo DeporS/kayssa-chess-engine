@@ -7,7 +7,7 @@ def main():
     board = Board()
 
     # Set FEN position
-    fen = "rnk3B1/pP2R2p/3Q2pB/5pP1/8/2N4P/PPP5/4R1K1 b - - 0 26"
+    fen = "k1K5/P7/pP1b4/8/3B4/8/8/8 w - - 0 1"
     board.set_fen_position(fen)
 
     # print(f"Legal moves: {list(board.board.legal_moves)}")
@@ -20,7 +20,7 @@ def main():
 
     # Get best move
     # while not board.is_checkmate() or not board.is_stalemate():
-    for i in range(1):
+    for i in range(5):
         print(f"{'White' if board.get_turn() else 'Black'} moves")
         best_move = engine.get_best_move()
         print(f"Best move: {best_move}")
