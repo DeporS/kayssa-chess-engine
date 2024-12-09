@@ -5,7 +5,8 @@ import chess.pgn
 games_with_eval = []
 with open("files/2016-02.pgn", "r") as pgn_file:
     
-    for i in range(10000):
+    for i in range(50000):
+        if i < 10000: continue
         game = chess.pgn.read_game(pgn_file)
         if game is None:
             break

@@ -39,11 +39,22 @@ def main():
             print(f"Evaluation: {evaluate_board(board)}")
 
 def test_model():
-    model = keras.models.load_model("chess_model.keras")
-    fen_new = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    # for testing
+    model = keras.models.load_model("kayssa.keras")
+    fen_new = "R7/ppp2kpp/5p2/8/2pQ2P1/1P6/PBP2P1P/RN4K1 b - - 0 17"
     vector_new = feature_extractor.board_vector_from_fen(fen_new)
-    eval_pred = model.predict(np.array([vector_new]))  # Przewidywana ocena
-    print(f"Predykcja oceny: {eval_pred}")
+    eval_pred = model.predict(np.array([vector_new]))  
+    print(f"Evaluation prediction: {eval_pred}")
+
+    fen_new = "r4rk1/ppp1Rppp/8/8/2pQ2P1/1P6/PBP2P1P/RN4K1 b - - 0 14"
+    vector_new = feature_extractor.board_vector_from_fen(fen_new)
+    eval_pred = model.predict(np.array([vector_new]))  
+    print(f"Evaluation prediction: {eval_pred}")
+
+    fen_new = "6k1/ppR2ppp/8/8/2p3P1/1P6/PBP2P1P/RN1r2K1 w - - 1 17"
+    vector_new = feature_extractor.board_vector_from_fen(fen_new)
+    eval_pred = model.predict(np.array([vector_new]))  
+    print(f"Evaluation prediction: {eval_pred}")
 
 if __name__ == "__main__":
     test_model()
