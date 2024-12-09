@@ -1,6 +1,8 @@
-from kayssa import Board, evaluate_board, Engine
+from kayssa import Board, evaluate_board, Engine, feature_extractor
 import chess
-
+import pandas as pd
+import numpy as np
+from tensorflow import keras
 
 def main():
     # Initiate board
@@ -36,6 +38,12 @@ def main():
             print(board.display())
             print(f"Evaluation: {evaluate_board(board)}")
 
+def test_model():
+    model = keras.models.load_model("chess_model.keras")
+    fen_new = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    vector_new = feature_extractor.board_vector_from_fen(fen_new)
+    eval_pred = model.predict(np.array([vector_new]))  # Przewidywana ocena
+    print(f"Predykcja oceny: {eval_pred}")
 
 if __name__ == "__main__":
-    main()
+    test_model()
